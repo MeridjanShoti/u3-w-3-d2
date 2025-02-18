@@ -1,7 +1,9 @@
 export const ADD_JOBS = "ADD_JOBS";
 export const ADD_QUERY = "ADD_QUERY";
 export const ADD_FAVOURITE = "ADD_FAVOURITE";
-export const addJobsAction = (data) => ({ type: "ADD_FAVOURITE", payload: data.company_name });
+export const RESET_JOBS = "RESET_JOBS";
+export const addFavourite = (data) => ({ type: ADD_FAVOURITE, payload: data.company_name });
+export const addJobsAction = (data) => ({ type: ADD_JOBS, payload: data.company_name });
 export const addQuery = (e) => ({ type: "ADD_QUERY", payload: e });
 export const getJobs = (companyParams) => {
   return async (dispatch) => {

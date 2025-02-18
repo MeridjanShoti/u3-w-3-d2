@@ -6,7 +6,7 @@ const initialState = {
 const addFavourite = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAVOURITE:
-      return { ...state, content: action.payload };
+      return { ...state, content: [...state.content, action.payload] };
     default:
       return state;
   }

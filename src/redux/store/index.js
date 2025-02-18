@@ -5,7 +5,7 @@ import addFavourite from "../reducers/addFavourite";
 const rootReducer = combineReducers({
   jobs: addJobs,
   query: addQuery,
-  addFavourite: addFavourite,
+  favourites: addFavourite,
 });
 const store = configureStore({ reducer: rootReducer });
 export default store;

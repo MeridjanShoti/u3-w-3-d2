@@ -1,16 +1,17 @@
-import { Container, Row, Col, Form } from "react-bootstrap";
-import Job from "./Job";
+import { Container, Row, Col, Form, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { searchJob } from "../redux/actions";
+import { addQuery, RESET_JOBS, searchJob } from "../redux/actions";
+import Job from "./Job";
+import { useEffect } from "react";
 
 const MainSearch = () => {
-  const jobs = useSelector((state) => state.jobs);
-  const query = useSelector((state) => state.query);
+  const jobs = useSelector((state) => state.jobs.content);
+  const query = useSelector((state) => state.query.content);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    dispatch(e.target.value);
+    dispatch(addQuery(e.target.value));
   };
 
   const handleSubmit = async (e) => {
@@ -18,10 +19,15 @@ const MainSearch = () => {
 
     dispatch(searchJob(query));
   };
-
+  useEffect(() => {
+    dispatch({ type: RESET_JOBS });
+    dispatch(addQuery(""));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log(query);
   return (
     <Container>
-      {console.log("jobs", jobs)}
+      {console.log("jobs mainsearch", jobs)}
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <h1 className="display-1">Remote Jobs Search</h1>
@@ -33,9 +39,7 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
-          ))}
+          {jobs ? jobs.map((jobData) => <Job key={jobData._id} data={jobData} />) : <Alert>no jobs</Alert>}
         </Col>
       </Row>
     </Container>
