@@ -2,32 +2,16 @@ import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Job from "./Job";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getJobs } from "../redux/actions";
 const CompanySearchResults = () => {
   const jobs = useSelector((state) => state.jobs);
-  const dispatch = useDispatch();
   const params = useParams();
 
-  const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?company=";
-
   useEffect(() => {
-    getJobs();
+    getJobs(params);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const getJobs = async () => {
-    try {
-      const response = await fetch(baseEndpoint + params.company);
-      if (response.ok) {
-        const { data } = await response.json();
-        dispatch({ type: "ADD_JOBS", payload: data });
-      } else {
-        alert("Error fetching results");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <Container>
