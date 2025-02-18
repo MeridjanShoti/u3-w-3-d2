@@ -1,12 +1,12 @@
 import { ADD_JOBS } from "../actions";
 
 const initialState = {
-  jobs: [],
+  content: [],
 };
 const addJobs = (state = initialState, action) => {
   switch (action.type) {
     case ADD_JOBS:
-      return { ...state, jobs: action.payload };
+      return { ...state, content: action.payload };
     default:
       return state;
   }
