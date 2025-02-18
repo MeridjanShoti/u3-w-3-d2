@@ -1,12 +1,12 @@
 import { ADD_FAVOURITE } from "../actions";
 
 const initialState = {
-  favourites: [],
+  content: [],
 };
 const addFavourite = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAVOURITE:
-      return { ...state, favourites: [...state.favourites, action.payload] };
+      return { ...state, content: action.payload };
     default:
       return state;
   }
