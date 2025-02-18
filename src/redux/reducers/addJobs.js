@@ -6,7 +6,7 @@ const initialState = {
 const addJobs = (state = initialState, action) => {
   switch (action.type) {
     case ADD_JOBS:
-      return { ...state, content: action.payload };
+      return { content: action.payload };
     default:
       return state;
   }
